@@ -191,7 +191,7 @@ function loadQuiz() {
   }
 
   const currentQuizData = quizData[currentQuiz];
-  questionEl.innerText = currentQuizData.question;
+  questionEl.innerText = `${currentQuiz + 1} ${currentQuizData.question}`;
   if (currentQuizData.onePhoto !== "NULL") {
     document.querySelector(
       "#photo"
