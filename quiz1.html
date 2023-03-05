@@ -14,6 +14,21 @@
       .result {
         width: 170px;
       }
+      .quiz-container {
+        position: relative;
+      }
+      .finish {
+        position: absolute;
+        width: 150px;
+        margin: 2rem 0 1rem 12rem;
+        padding: 0.5rem;
+        background-color: green;
+        right: 2%;
+      }
+
+      .finish:hover {
+        background-color: rgb(5, 160, 5);
+      }
     </style>
   </head>
   <body>
@@ -57,7 +72,8 @@
         </ul>
       </div>
       <button id="submit">Next</button>
-      <button id="prev" value="0" class="prev">Prev</button>
+      <button id="prev" value="0" class="prev">Prev</button> <br />
+      <button id="finish" value="0" class="finish">Soza Ikizamini</button>
     </div>
     <script src="script.js"></script>
   </body>

@@ -60,8 +60,8 @@
         font-weight: bold;
       }
       img {
-        width: 10%;
-        height: 10%;
+        width: 14%;
+        height: 14%;
         background-color: red;
       }
       .summary div {
@@ -163,54 +163,6 @@
     </div>
   </body>
   <script>
-    // const quizData = [
-    //   {
-    //     question: "1. Which language runs in a web browser?",
-    //     a: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
-
-    //     b: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
-
-    //     c: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
-
-    //     d: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
-
-    //     correct: "d",
-    //     photos: true,
-    //     onePhoto: false,
-    //   },
-    //   {
-    //     question: "2. What does CSS stand for?",
-    //     a: "Central Style Sheets",
-    //     b: "Cascading Style Sheets",
-    //     c: "Cascading Simple Sheets",
-    //     d: "Cars SUVs Sailboats",
-    //     correct: "b",
-    //     photos: false,
-    //     onePhoto:
-    //       "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
-    //   },
-    //   {
-    //     question: "3. What does HTML stand for?",
-    //     a: "Hypertext Markup Language",
-    //     b: "Hypertext Markdown Language",
-    //     c: "Hyperloop Machine Language",
-    //     d: "Helicopters Terminals Motorboats Lamborginis",
-    //     correct: "a",
-    //     photos: false,
-    //     onePhoto: false,
-    //   },
-    //   {
-    //     question: "4. What year was JavaScript launched?",
-    //     a: "1996",
-    //     b: "1995",
-    //     c: "1994",
-    //     d: "none of the above",
-    //     correct: "b",
-    //     photos: false,
-    //     onePhoto: false,
-    //   },
-    // ];
-
     const quizData = localStorage.getItem("quizData")
       ? JSON.parse(localStorage.getItem("quizData"))
       : [];
@@ -243,7 +195,7 @@
 
     quizData.forEach(
       ({ question, a, b, c, d, correct, photos, onePhoto }, i) => {
-        console.log(correct);
+        console.log(answers[i][i]);
         let html = `   <div class="quiz-container" id="quiz">
              <div class="quiz-header">
                <div class="questionHeader">

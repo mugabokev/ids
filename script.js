@@ -56,7 +56,7 @@ const c_text = document.getElementById("c_text");
 const d_text = document.getElementById("d_text");
 const nextBtn = document.getElementById("submit");
 const prevBtn = document.getElementById("prev");
-
+const finishBtn = document.getElementById("finish");
 const COUNTER_KEY = "my-counter";
 function timer(today) {
   const second = 1000,
@@ -187,6 +187,7 @@ function loadQuiz() {
   }
   if (currentQuiz === quizData.length - 1) {
     nextBtn.innerText = "Soza Ikizamini";
+    finishBtn.style.display = "none";
   }
 
   const currentQuizData = quizData[currentQuiz];
@@ -287,6 +288,13 @@ nextBtn.addEventListener("click", () => {
       window.location = "result.html";
     }
   }
+});
+
+finishBtn.addEventListener("click", () => {
+  localStorage.setItem("answers", JSON.stringify(answers));
+  window.localStorage.removeItem("counter");
+
+  window.location = "result.html";
 });
 
 prevBtn.addEventListener("click", () => {
