@@ -30,6 +30,9 @@ document.addEventListener("click", function (e) {
   }
 
   switch (id) {
+    case "viewDashboard":
+      fetchContents("indexPage.php", "");
+      break;
     case "addQuestion":
       fetchContents("exam/addExam.php", "");
       break;
@@ -46,8 +49,6 @@ document.addEventListener("click", function (e) {
       deleteQuestion(value);
       break;
     case "updateQuestion":
-      // let formData = new FormData();
-      // formData.append("id", value);
       fetch(
         "exam/updateQuestionForm.php?id=" + value,
 
