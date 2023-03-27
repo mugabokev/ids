@@ -69,10 +69,46 @@
 												} else {
 													echo "<td>" . $row['questionText'] . "</td>";
 												}
-												echo "<td>"  . $row['choice1']   ."</td>";
-												echo "<td>"  . $row['choice2']   ."</td>";
-												echo "<td>"  . $row['choice3']   ."</td>";
-												echo "<td>"  . $row['choice4']   ."</td>";
+												if (str_contains($row['choice1'], '.jpg')
+												|| str_contains($row['choice1'], '.png')
+												 || str_contains($row['choice1'], '.jpeg')) {
+													?>
+													<td><br>
+													<img src="uploads/<?php echo $row['choice1'] ?>" width='100px' height='100px' alt='pic'>
+													</td>
+													<?php
+												} else {
+													echo "<td>" . $row['choice1'] . "</td>";
+												}
+												if (str_contains($row['choice2'], '.jpg')
+												|| str_contains($row['choice2'], '.png')
+												 || str_contains($row['choice2'], '.jpeg')) {													?>
+													<td><br>
+													<img src="uploads/<?php echo $row['choice2'] ?>" width='100px' height='100px' alt='pic'>
+													</td>
+													<?php
+												} else {
+													echo "<td>" . $row['choice2'] . "</td>";
+												}
+												if (str_contains($row['choice3'], '.jpg')
+												|| str_contains($row['choice3'], '.png')
+												 || str_contains($row['choice3'], '.jpeg')) {													?>
+													<td><br>
+													<img src="uploads/<?php echo $row['choice3'] ?>" width='100px' height='100px' alt='pic'>
+													</td>
+													<?php
+												} else {
+													echo "<td>" . $row['choice3'] . "</td>";
+												}
+												if (str_contains($row['choice4'], '.jpg' || str_contains($row['choice4'], '.png'))) {
+													?>
+													<td><br>
+													<img src="uploads/<?php echo $row['choice4'] ?>" width='100px' height='100px' alt='pic'>
+													</td>
+													<?php
+												} else {
+													echo "<td>" . $row['choice4'] . "</td>";
+												}
 												echo "<td>"  . $row['correctChoice']   ."</td>";
 												echo "
 												<td>

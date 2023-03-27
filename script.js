@@ -129,11 +129,18 @@ document.addEventListener("DOMContentLoaded", () => {
           question["onePhoto"] = question["questionPhoto"];
           delete question["questionPhoto"];
 
+          // if (question["onePhoto"].includes("uploads")) {
+          //   question["photos"] = changePhotoPath(question["onePhoto"]);
+          // }
           question.photos =
             question.a.includes(".jpg") ||
             question.b.includes(".png") ||
             question.c.includes(".jpeg") ||
             question.d.includes(".gif");
+
+          if (question.photos) {
+            console.log(question.a);
+          }
         });
 
         // list image formats
@@ -164,7 +171,6 @@ let score = 0;
 
 function loadQuiz() {
   deselectAnswers();
-  console.log(quizData);
   if (currentQuiz === 0) {
     prevBtn.style.display = "none";
   } else {
@@ -182,6 +188,7 @@ function loadQuiz() {
   }
   if (currentQuizData.photos === true) {
     document.querySelector("ul").classList.add("photoGrid");
+    console.log(`admin / uploads / ${currentQuizData.a}`);
     a_text.innerHTML = `<img src="admin/uploads/${currentQuizData.a}" alt=""/>`;
     b_text.innerHTML = `<img src="admin/uploads/${currentQuizData.b}" alt=""/>`;
     c_text.innerHTML = `<img src="admin/uploads/${currentQuizData.c}" alt=""/>`;
@@ -197,7 +204,6 @@ function loadQuiz() {
 }
 
 function deselectAnswers() {
-  console.log(quizData);
   if (currentQuiz == quizData.length - 1) {
     // make answers[currentQuiz] checked
     if (answers?.length == quizData?.length) {
@@ -310,7 +316,7 @@ function calculateScore() {
 }
 
 function changePhotoPath(photo) {
-  let newPhoto = photo.replace("../", "admin/");
+  let newPhoto = photo.replace("../uploads", "");
   //remove single quotes
   newPhoto = newPhoto.replace(/'/g, "");
   return newPhoto;
