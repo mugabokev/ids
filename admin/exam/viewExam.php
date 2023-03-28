@@ -100,8 +100,9 @@
 												} else {
 													echo "<td>" . $row['choice3'] . "</td>";
 												}
-												if (str_contains($row['choice4'], '.jpg' || str_contains($row['choice4'], '.png'))) {
-													?>
+												if (str_contains($row['choice4'], '.jpg')
+												|| str_contains($row['choice4'], '.png')
+												 || str_contains($row['choice4'], '.jpeg')) {													?>
 													<td><br>
 													<img src="uploads/<?php echo $row['choice4'] ?>" width='100px' height='100px' alt='pic'>
 													</td>
