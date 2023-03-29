@@ -101,6 +101,9 @@ function timer(today) {
         nextBtn.style.opacity = 0.5;
         nextBtn.style.cursor = "not-allowed";
         nextBtn.disabled = true;
+        prevBtn.style.opacity = 0.5;
+        prevBtn.style.cursor = "not-allowed";
+        prevBtn.disabled = true;
         clearInterval(x);
       }
       //seconds
