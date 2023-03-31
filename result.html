@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- iCheck for checkboxes and radio inputs -->
+
+    <title>Ibisubizo</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="admin/plugins/fontawesome-free/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+      }
+
+      body {
+        background-color: #ebe5e5;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .summary {
+        line-height: 1.6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+        min-height: 10vh;
+        padding: 1rem;
+      }
+
+      button {
+        background-color: blue;
+        color: #fff;
+        border: none;
+        display: block;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-family: inherit;
+        padding: 0.5rem;
+        float: right;
+        width: 6rem;
+        border-radius: 18px;
+      }
+
+      button .success {
+        background-color: green;
+      }
+
+      button .failure {
+        background-color: red;
+      }
+
+      .score {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      img {
+        width: 10%;
+        height: 10%;
+        background-color: red;
+      }
+      .summary div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.7rem;
+      }
+
+      div.answers {
+        margin-left: 6em;
+      }
+
+      .quiz-container {
+        margin-left: 2em;
+        margin-top: 3em;
+        border-radius: 10px;
+        width: 80vw;
+        min-width: 300px;
+        margin-bottom: 1rem;
+      }
+
+      .quiz-header {
+        padding: 2rem;
+        padding-bottom: 1rem;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      ul li {
+        font-size: 1.2rem;
+        margin: 1rem 0;
+      }
+
+      ul li label {
+        cursor: pointer;
+      }
+      .photoGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+      }
+      .ans {
+        margin-left: 4em;
+        margin-top: 5em;
+      }
+
+      .bgGreen {
+        background-color: rgb(89, 155, 89);
+        color: white;
+        padding: 0.2em;
+        border-radius: 5px;
+        padding-left: 0.7em;
+        padding-right: 0.7em;
+      }
+
+      .bgRed {
+        background-color: red;
+        color: white;
+        padding: 0.2em;
+        border-radius: 5px;
+        padding-left: 0.7em;
+        padding-right: 0.7em;
+        opacity: 0.6;
+      }
+      .bgGreen .fa {
+        color: white;
+      }
+      .fa-check {
+        color: green;
+      }
+
+      .fa-times {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="summary">
+      <h1>Amanota y'Ikizamini</h1>
+      <div class="exam-type">
+        <h3>Ubwoko bw'ikizamini:</h3>
+        Ikizamini cyo gutwara ibinyabiziga - By'agateganyo
+      </div>
+      <div>
+        <h3>Ikiciro wasabye:</h3>
+        Provisional
+      </div>
+      <div>
+        <h2>Amanota:</h2>
+        <span id="score" class="score"> 10 </span>
+      </div>
+      <button id="result">Watsinze</button>
+    </div>
+    <div class="answers">
+      <h3 class="ans">Ibisubizo</h3>
+    </div>
+  </body>
+  <script>
+    // const quizData = [
+    //   {
+    //     question: "1. Which language runs in a web browser?",
+    //     a: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
+
+    //     b: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
+
+    //     c: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
+
+    //     d: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
+
+    //     correct: "d",
+    //     photos: true,
+    //     onePhoto: false,
+    //   },
+    //   {
+    //     question: "2. What does CSS stand for?",
+    //     a: "Central Style Sheets",
+    //     b: "Cascading Style Sheets",
+    //     c: "Cascading Simple Sheets",
+    //     d: "Cars SUVs Sailboats",
+    //     correct: "b",
+    //     photos: false,
+    //     onePhoto:
+    //       "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71L0EbialtL.jpg",
+    //   },
+    //   {
+    //     question: "3. What does HTML stand for?",
+    //     a: "Hypertext Markup Language",
+    //     b: "Hypertext Markdown Language",
+    //     c: "Hyperloop Machine Language",
+    //     d: "Helicopters Terminals Motorboats Lamborginis",
+    //     correct: "a",
+    //     photos: false,
+    //     onePhoto: false,
+    //   },
+    //   {
+    //     question: "4. What year was JavaScript launched?",
+    //     a: "1996",
+    //     b: "1995",
+    //     c: "1994",
+    //     d: "none of the above",
+    //     correct: "b",
+    //     photos: false,
+    //     onePhoto: false,
+    //   },
+    // ];
+
+    const quizData = localStorage.getItem("quizData")
+      ? JSON.parse(localStorage.getItem("quizData"))
+      : [];
+    const answers = localStorage.getItem("answers")
+      ? JSON.parse(localStorage.getItem("answers"))
+      : [];
+
+    let score = calculateScore();
+
+    let scoreEl = document.querySelector("#score");
+    let answerBox = document.querySelector(".answers");
+    const result = document.querySelector("#result");
+
+    result.style.backgroundColor =
+      score >= quizData.length / 2 ? "green" : "red";
+    result.innerHTML = score >= quizData.length / 2 ? "Watsinze" : "Watsinzwe";
+    scoreEl.innerHTML = `${score}/${quizData.length}`;
+
+    function calculateScore() {
+      let score = 0;
+      answers.forEach((answer) => {
+        if (
+          answer[Object.keys(answer)[0]] ===
+          quizData[Object.keys(answer)[0]].correct
+        ) {
+          score++;
+        }
+      });
+      return score;
+    }
+
+    quizData.forEach(
+      ({ question, a, b, c, d, correct, photos, onePhoto }, i) => {
+        console.log(correct);
+        let html = `   <div class="quiz-container" id="quiz">
+             <div class="quiz-header">
+               <div class="questionHeader">
+                 <h2 >${i + 1}. ${question} </h2>
+               </div>
+
+               <div>
+                ${
+                  onePhoto && onePhoto != "NULL"
+                    ? `<img src='admin/uploads/${onePhoto}' alt="" id="photo" />`
+                    : ``
+                }
+               </div>
+               <ul class=${photos ? "photoGrid" : ""}>
+                 <li>
+                   <div class="icheck-primary d-inline">
+                     <input type="radio" name="answer" id="a" class="answer" disabled/>
+                     <label
+					 class=
+					 ${"a" == correct && !photos ? "bgGreen" : ``}
+
+
+					  ${"a" !== correct && "a" == answers[i][i] ? "bgRed" : ``}
+					  for="a" id="a_text">
+
+                   ${
+                     photos ? `<img src='admin/uploads/${a}' alt="" />` : `${a}`
+                   }
+    			   ${
+               "a" == correct && "a" == answers[i][i]
+                 ? "<i class='fa fa-check'> </i>"
+                 : ``
+             }
+
+				   ${
+             "a" !== correct && "a" == answers[i][i] && !photos
+               ? "<i class='fa fa-times fa-sm' style='color:white'> </i>"
+               : ``
+           }
+           ${
+             "a" !== correct && "a" == answers[i][i] && photos
+               ? "<i class='fa fa-times fa-sm' style='color:red'> </i>"
+               : ``
+           }
+           ${
+             "a" == correct && "a" !== answers[i][i] && photos
+               ? "<i class='fa fa-check fa-sm' style='color:green'> </i>"
+               : ``
+           }
+               </label>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="icheck-primary d-inline">
+                     <input type="radio" name="answer" id="b" class="answer" disabled/>
+         <label
+		 class=${"b" == correct && !photos ? "bgGreen" : ""}
+		 ${"b" !== correct && "b" == answers[i][i] ? "bgRed" : ``}
+
+		 for="a" id="a_text">${
+       photos ? `<img src='admin/uploads/${b}' alt="" />` : `${b}`
+     }
+    ${
+      "b" == correct && "b" == answers[i][i]
+        ? "<i class='fa fa-check' style='color:white'> </i>"
+        : " </i>"
+    }
+	${
+    "b" !== correct && "b" == answers[i][i] && !photos
+      ? "<i class='fa fa-times fa-sm' style='color:white'> </i>"
+      : ``
+  }
+  ${
+    "b" !== correct && "b" == answers[i][i] && photos
+      ? "<i class='fa fa-times fa-sm' style='color:red'> </i>"
+      : ``
+  }
+
+  ${
+    "b" == correct && "b" !== answers[i][i] && photos
+      ? "<i class='fa fa-check fa-sm' style='color:green'> </i>"
+      : ``
+  }
+    </label>                 </div>
+                 </li>
+
+                 <li>
+                   <div class="icheck-primary d-inline">
+                     <input type="radio" name="answer" id="c" class="answer" disabled/>
+         <label class=${"c" == correct && !photos ? "bgGreen" : ""}
+		 ${"c" !== correct && "c" == answers[i][i] && !photos ? "bgRed" : ``}
+
+		 for="c" id="c_text">${
+       photos ? `<img src='admin/uploads/${c}' alt="" />` : `${c}`
+     }
+    ${
+      "c" == correct && "c" == answers[i][i]
+        ? "<i class='fa fa-check'> </i>"
+        : " </i>"
+    }
+	${
+    "c" !== correct && "c" == answers[i][i] && !photos
+      ? "<i class='fa fa-times fa-sm' style='color:white'> </i>"
+      : ``
+  }
+
+  ${
+    "c" !== correct && "c" == answers[i][i] && photos
+      ? "<i class='fa fa-times fa-sm' style='color:red'> </i>"
+      : ``
+  }
+  ${
+    "c" == correct && "c" !== answers[i][i] && photos
+      ? "<i class='fa fa-check fa-sm' style='color:green'> </i>"
+      : ``
+  }
+     </label>                 </div>
+                 </li>
+
+
+                 <li>
+                   <div class="icheck-primary d-inline">
+                     <input type="radio" name="answer" id="d" class="answer" disabled/>
+         <label class=${"d" == correct && !photos ? "bgGreen" : ""}
+		 ${"d" !== correct && "d" == answers[i][i] && !photos ? "bgRed" : ``}
+		 for="d" id="d_text">${
+       photos ? `<img src='admin/uploads/${d}' alt="" />` : `${d}`
+     }
+    ${
+      "d" == correct && "d" == answers[i][i]
+        ? "<i class='fa fa-check'> </i>"
+        : " </i>"
+    }
+	${
+    "d" == correct
+      ? "<i class='fa fa-hand-point-left' style='color:green'> </i>"
+      : ``
+  }
+	${
+    "d" !== correct && "d" == answers[i][i] && !photos
+      ? "<i class='fa fa-times fa-sm' style='color:white'> </i>"
+      : ``
+  }
+	${
+    "d" !== correct && "d" == answers[i][i] && photos
+      ? "<i class='fa fa-times fa-sm' style='color:red'> </i>"
+      : ``
+  }
+  ${
+    "d" == correct && "d" !== answers[i][i] && photos
+      ? "<i class='fa fa-check fa-sm' style='color:green'> </i>"
+      : ``
+  }
+    </label>                 </div>
+                 </li>
+               </ul>
+             </div>
+           </div>`;
+
+        // parse html and append to answers box
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, "text/html");
+        answerBox.appendChild(doc.body.firstChild);
+      }
+    );
+  </script>
+</html>

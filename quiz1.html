@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Ikizamini</title>
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link
+      rel="stylesheet"
+      href="admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
+    />
+    <style>
+      .result {
+        width: 170px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quiz-container" id="quiz">
+      <div class="quiz-header">
+        <div class="questionHeader">
+          <h2 id="question">Question text</h2>
+          <h1><span id="minutes"></span>:<span id="seconds"></span></h1>
+        </div>
+
+        <div>
+          <img src="" alt="" id="photo" />
+        </div>
+        <ul>
+          <li>
+            <div class="icheck-primary d-inline">
+              <input type="radio" name="answer" id="a" class="answer" />
+              <label for="a" id="a_text">Question</label>
+            </div>
+          </li>
+          <li>
+            <div class="icheck-primary d-inline">
+              <input type="radio" name="answer" id="b" class="answer" />
+              <label for="b" id="b_text">Question</label>
+            </div>
+          </li>
+
+          <li>
+            <div class="icheck-primary d-inline">
+              <input type="radio" name="answer" id="c" class="answer" />
+              <label for="c" id="c_text">Question</label>
+            </div>
+          </li>
+
+          <li>
+            <div class="icheck-primary d-inline">
+              <input type="radio" name="answer" id="d" class="answer" />
+              <label for="d" id="d_text">Question</label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button id="submit">Next</button>
+      <button id="prev" value="0" class="prev">Prev</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
