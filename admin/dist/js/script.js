@@ -85,7 +85,7 @@ function addQuestion(e) {
     choice4 = document.querySelector("#choice-4-photo")?.files[0];
   }
   let correctChoice = document.querySelector("#correct-choice")?.value;
-  console.log(choice1, choice2, choice3, choice4);
+
   if (!choice1 || !choice2 || !choice3 || !choice4 || !correctChoice) {
     alert("Ugomba kwinjiza Ibisubizo byose");
     return;

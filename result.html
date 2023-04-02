@@ -223,9 +223,8 @@
     let answerBox = document.querySelector(".answers");
     const result = document.querySelector("#result");
 
-    result.style.backgroundColor =
-      score >= quizData.length / 2 ? "green" : "red";
-    result.innerHTML = score >= quizData.length / 2 ? "Watsinze" : "Watsinzwe";
+    result.style.backgroundColor = score >= 12 ? "green" : "red";
+    result.innerHTML = score >= 12 ? "Watsinze" : "Watsinzwe";
     scoreEl.innerHTML = `${score}/${quizData.length}`;
 
     function calculateScore() {

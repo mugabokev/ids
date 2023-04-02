@@ -45,6 +45,7 @@
 //     onePhoto: false,
 //   },
 // ];
+
 let quizData;
 const quiz = document.getElementById("quiz");
 const answerEls = document.querySelectorAll(".answer");
@@ -105,6 +106,13 @@ function timer(today) {
         prevBtn.style.cursor = "not-allowed";
         prevBtn.disabled = true;
         clearInterval(x);
+        localStorage.setItem("answers", JSON.stringify(answers));
+        window.localStorage.removeItem("counter");
+
+        setTimeout(() => {
+          alert("Igihe cyaranjyiye, ujyiye kujyanwa kuri paje y'ibisubizo");
+          window.location = "result.html";
+        }, 2000);
       }
       //seconds
     }, 0);
@@ -146,16 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        // list image formats
-
-        quizData = data;
+        quizData = data.sort(() => Math.random() - 0.5).splice(0, 20);
         localStorage.setItem("quizData", JSON.stringify(quizData));
 
         loadQuiz();
         if (window.localStorage.getItem("counter") == null) {
           let today = new Date();
           let min = today.getMinutes();
-          today.setMinutes(min + 1);
+          today.setMinutes(min + 20);
           window.localStorage.setItem("counter", today);
           timer(today);
         } else {
@@ -179,6 +185,10 @@ function loadQuiz() {
   } else {
     prevBtn.style.display = "inline-block";
   }
+  if (currentQuiz === quizData.length - 1) {
+    nextBtn.innerText = "Soza Ikizamini";
+  }
+
   const currentQuizData = quizData[currentQuiz];
   questionEl.innerText = currentQuizData.question;
   if (currentQuizData.onePhoto !== "NULL") {
@@ -274,10 +284,7 @@ nextBtn.addEventListener("click", () => {
       localStorage.setItem("answers", JSON.stringify(answers));
       window.localStorage.removeItem("counter");
 
-      quiz.innerHTML = `<br>
-                <h2>Igihe cyo gukora cyaranjyiye
-            <a href='result.html'>      <button class='result'>Reba amanota</button> </a>
-            `;
+      window.location = "result.html";
     }
   }
 });
