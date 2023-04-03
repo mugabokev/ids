@@ -113,12 +113,12 @@
 												echo "<td>"  . $row['correctChoice']   ."</td>";
 												echo "
 												<td>
-												<button id='updateHostel' class='btn btn-success btn-xs' value=" . $row['id'] . ">
+												<button id='updateQuestion' class='btn btn-success btn-xs' value=" . $row['id'] . ">
 												<i class='fas fa-edit-alt'></i> Hindura
 												</button>
 												</td>";
 												echo "<td>
-												<button id='deleteHostel' class='btn btn-outline-danger btn-sm' value=" . $row['id'] . ">
+												<button id='deleteQuestion' class='btn btn-outline-danger btn-sm' value=" . $row['id'] . ">
 												Gusiba
 												</button></td>";
 										  echo "</tr>";

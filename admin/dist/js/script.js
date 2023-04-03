@@ -11,7 +11,7 @@ document.querySelector("#viewExam").addEventListener("click", function (e) {
 });
 
 document.addEventListener("click", function (e) {
-  const { id } = e.target;
+  const { id, value } = e.target;
   if (id == "chooseAnswerText" || id == "chooseAnswerPhoto") {
     const answer = document.querySelectorAll(".choice-text");
     const answerImage = document.querySelectorAll(".choice-img");
@@ -42,6 +42,32 @@ document.addEventListener("click", function (e) {
     case "addQuestionBtn":
       addQuestion(e);
       break;
+    case "deleteQuestion":
+      deleteQuestion(value);
+      break;
+    case "updateQuestion":
+      // let formData = new FormData();
+      // formData.append("id", value);
+      fetch(
+        "exam/updateQuestionForm.php?id=" + value,
+
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.text())
+        .then((html) => {
+          let parser = new DOMParser();
+          let doc = parser
+            .parseFromString(html, "text/html")
+            .querySelector("#view");
+          contentWrapper.innerHTML = doc.innerHTML;
+        });
+
+      break;
+    case "updateQuestionBtn":
+      updateQuestion(e);
+      break;
   }
 });
 
@@ -61,6 +87,70 @@ function changeImage(e) {
   box.style.backgroundPosition = "center";
 }
 
+function deleteQuestion(id) {
+  fetch(`exam/removeQuestion.php?id=${id}`, {
+    method: "GET",
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      if (data.trim() == "1") {
+        Toast.fire({
+          icon: "success",
+          title: "Kongera ikibazo byagenze neza",
+        });
+
+        fetchContents("exam/viewExam.php", "");
+      }
+    });
+}
+
+function updateQuestion(e) {
+  e.preventDefault();
+  let questionText = document.querySelector("#question-text")?.value;
+  let questionImage = document.querySelector("#question-image")?.files[0];
+
+  let questionId = document.querySelector("#updateQuestionBtn")?.value;
+  let formData = new FormData();
+  let question = questionText ? questionText : questionImage;
+  formData.append("question-text", question);
+
+  formData.append("question-photo", questionImage);
+  formData.append("isQuestionPhoto", questionImage ? "1" : "0");
+  formData.append("question-id", questionId);
+
+  fetch("exam/updateQuestion.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      if (data.trim() == "1") {
+        Toast.fire({
+          icon: "success",
+          title: "Kuvugurura ikibazo byagenze neza",
+        });
+
+        fetchContents("exam/viewExam.php", "");
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Kuvugurura ikibazo ntago byakunze, Ongera mukanya",
+        });
+      }
+    });
+}
 function addQuestion(e) {
   e.preventDefault();
   let questionText = document.querySelector("#question-text")?.value;

@@ -6,25 +6,12 @@
 		$questionPhoto = 'NULL';
 	}
 
-    if ($_POST["areAnswersImages"] == '1') {
-		$choice1 = uploadImage($_FILES["choice1"]);
-		$choice2 = uploadImage($_FILES["choice2"]);
-		$choice3 = uploadImage($_FILES["choice3"]);
-		$choice4 = uploadImage($_FILES["choice4"]);
-	} else {
-		$choice1 = htmlentities($_POST['choice1']);
-		$choice2 = htmlentities($_POST['choice2']);
-		$choice3 = htmlentities($_POST['choice3']);
-		$choice4 = htmlentities($_POST['choice4']);
-	}
 
-	$correctChoice = $_POST['correct-choice'];
 	$question = htmlentities($_POST['question-text']);
 
-	$sql = "INSERT INTO
-	`question` (`id`, `questionText`, `choice1`, `choice2`, `choice3`, `choice4`, `correctChoice`, `questionPhoto`)
-	VALUES
-	 (NULL, '$question', '$choice1', '$choice2', '$choice3', '$choice4', '$correctChoice', '$questionPhoto')";
+	$sql = "UPDATE `question` SET
+	`questionText` = '$question', `questionPhoto` = '$questionPhoto'
+	WHERE `question`.`id` = ".$_POST['question-id']."";
 
 	 if ($res = mysqli_query($con, $sql)) {
 		echo "1";
